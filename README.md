@@ -1,2 +1,2 @@
 # react-cli
-a react custom cli
+a custom react cli
