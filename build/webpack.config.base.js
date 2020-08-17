@@ -53,7 +53,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: path.resolve(__dirname, '../dist/index.html'), // 打包生成的文件名
             template: path.resolve(__dirname, '../src/template/index.html'), // 打包的html模板
-            inject: true, // 注入js
+            inject: true, // body的底部注入js
             minify: process.env.NODE_ENV == 'production', // 最紧凑的输出
         }),
 
