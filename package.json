@@ -4,7 +4,9 @@
   "description": "react-cli via webpack",
   "private": true,
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack --config ./build/webpack.config.js --progress --profile --colors --display-error-details"
+    "build-dev": "rimraf dist && cross-env NODE_ENV=development webpack --config ./build/webpack.config.js --progress --profile --colors --display-error-details",
+    "build-test": "rimraf dist && cross-env NODE_ENV=production webpack --config ./build/webpack.config.js --progress --profile --colors --display-error-details",
+    "build-prod": "rimraf dist && cross-env NODE_ENV=production webpack --config ./build/webpack.config.js --progress --profile --colors --display-error-details"
   },
   "keywords": [
     "react"
@@ -16,10 +18,15 @@
     "@babel/preset-env": "^7.11.0",
     "babel-loader": "^8.1.0",
     "cross-env": "^7.0.2",
+    "css-loader": "^4.2.1",
     "eslint": "^7.6.0",
     "eslint-plugin-react": "^7.20.6",
     "html-webpack-plugin": "^4.3.0",
+    "less": "^3.12.2",
+    "less-loader": "^6.2.0",
+    "mini-css-extract-plugin": "^0.10.0",
     "rimraf": "^3.0.2",
+    "style-loader": "^1.2.1",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-merge": "^5.1.1"
