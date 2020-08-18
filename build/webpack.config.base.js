@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const isProd = process.env.NODE_ENV == 'production';
 
-// 根据环境使用不同loader
+// 根据环境使用不同loader <link> <-> <style>
 const generateLinkOrStyleLoader = () => {
     if (isProd) {
         return {
@@ -22,9 +22,9 @@ module.exports = {
         // vendor: []
     },
     output: {
-        filename: 'js/[name].[contenthash:8].js', // contenthash 针对文件内容级别的修改，只有文件模块内容改变，hash值才会改变
+        filename: 'js/[name]_[contenthash:8].js', // contenthash 针对文件内容级别的修改，只有文件模块内容改变，hash值才会改变，合理加快打包和缓存
         path: path.resolve(__dirname, '../dist'),
-        publicPath: './'
+        publicPath: '/'
     },
     resolve: {
         extensions: ['.js', '.jsx'],
@@ -42,11 +42,32 @@ module.exports = {
                      * production 需要把css -> <link>标签插入到html中用 MiniCssExtractPlugin.loader
                      * development 需要把css -> <style>标签插入到html中用 style-loader
                      */
-                    generateLinkOrStyleLoader(), // style-loader creates style nodes from JS strings
-                    'css-loader',   // translates CSS into CommonJS
-                    'less-loader',  // compiles Less to CSS
+                    generateLinkOrStyleLoader(),                            // style-loader creates style nodes from JS strings
+                    {
+                        loader: 'css-loader',                               // translates CSS into CommonJS
+                        options: {
+                            modules: {
+                                mode: 'local',                              // enable css module 模块化
+                                localIdentName: '[local]_[hash:base64:8]',  // 模块化名称
+                            },        
+                        }
+                    },       
+                    'postcss-loader',                                       // process CSS with PostCSS addprefix
+                'less-loader',                                              // compiles Less to CSS
                 ],
             },
+            {
+                test: /\.(jpe?g|png|gif|ico|woff|woff2|eot|ttf|svg|swf|otf)$/i,
+                use: [
+                    {
+                        loader: 'url-loader',
+                        options: {
+                            limit: 5000,  // 5kb内编译成为base64，大于5kb使用file-loader，打包出文件
+                            name: 'static/[name]_[contentHash:8].[ext]'
+                        }
+                    }
+                ]
+            }
         ],
     },
     plugins: [
@@ -58,7 +79,7 @@ module.exports = {
         }),
 
         new MiniCssExtractPlugin({
-            filename: 'css/[name].[contentHash:8].css',
+            filename: 'css/[name]_[contentHash:8].css',
         })
     ],
 };
