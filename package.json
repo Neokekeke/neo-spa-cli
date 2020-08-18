@@ -6,7 +6,9 @@
   "scripts": {
     "build-dev": "rimraf dist && cross-env NODE_ENV=development webpack --config ./build/webpack.config.js --progress --profile --colors --display-error-details",
     "build-test": "rimraf dist && cross-env NODE_ENV=production webpack --config ./build/webpack.config.js --progress --profile --colors --display-error-details",
-    "build-prod": "rimraf dist && cross-env NODE_ENV=production webpack --config ./build/webpack.config.js --progress --profile --colors --display-error-details"
+    "build-prod": "rimraf dist && cross-env NODE_ENV=production webpack --config ./build/webpack.config.js --progress --profile --colors --display-error-details",
+    "start-webpack-dev-server": "npm run build-dev && webpack-dev-server --open",
+    "start-express": "cross-env NODE_ENV=development node server.js"
   },
   "keywords": [
     "react"
@@ -30,6 +32,7 @@
     "css-loader": "^4.2.1",
     "eslint": "^7.6.0",
     "eslint-plugin-react": "^7.20.6",
+    "express": "^4.17.1",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.3.0",
     "less": "^3.12.2",
@@ -41,6 +44,9 @@
     "url-loader": "^4.1.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
+    "webpack-dev-middleware": "^3.7.2",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-hot-middleware": "^2.25.0",
     "webpack-merge": "^5.1.1"
   }
 }

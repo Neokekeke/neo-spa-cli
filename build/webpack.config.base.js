@@ -17,12 +17,8 @@ const generateLinkOrStyleLoader = () => {
 };
 
 module.exports = {
-    entry: {
-        app: path.resolve(__dirname, '../src/index.js'),
-        // vendor: []
-    },
     output: {
-        filename: 'js/[name]_[contenthash:8].js', // contenthash 针对文件内容级别的修改，只有文件模块内容改变，hash值才会改变，合理加快打包和缓存
+        filename: 'js/[name]_[hash:8].js', // contenthash 针对文件内容级别的修改，只有文件模块内容改变，hash值才会改变，合理加快打包和缓存
         path: path.resolve(__dirname, '../dist'),
         publicPath: '/'
     },
@@ -53,8 +49,9 @@ module.exports = {
                         }
                     },       
                     'postcss-loader',                                       // process CSS with PostCSS addprefix
-                'less-loader',                                              // compiles Less to CSS
+                    'less-loader',                                          // compiles Less to CSS
                 ],
+                exclude: [path.resolve(__dirname, '../node_modules')]
             },
             {
                 test: /\.(jpe?g|png|gif|ico|woff|woff2|eot|ttf|svg|swf|otf)$/i,
