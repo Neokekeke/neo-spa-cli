@@ -8,7 +8,8 @@
     "build-test": "rimraf dist && cross-env NODE_ENV=production webpack --config ./build/webpack.config.js --progress --profile --colors --display-error-details",
     "build-prod": "rimraf dist && cross-env NODE_ENV=production webpack --config ./build/webpack.config.js --progress --profile --colors --display-error-details",
     "start-webpack-dev-server": "npm run build-dev && webpack-dev-server --open",
-    "start-express": "cross-env NODE_ENV=development node server.js"
+    "start-express": "cross-env NODE_ENV=development node server.js",
+    "rimraf": "rimraf dist"
   },
   "keywords": [
     "react"
@@ -41,6 +42,7 @@
     "postcss-loader": "^3.0.0",
     "rimraf": "^3.0.2",
     "style-loader": "^1.2.1",
+    "terser-webpack-plugin": "^4.1.0",
     "url-loader": "^4.1.0",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
