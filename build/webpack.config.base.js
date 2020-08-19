@@ -77,6 +77,6 @@ module.exports = {
 
         new MiniCssExtractPlugin({
             filename: 'css/[name]_[contentHash:8].css',
-        })
+        }),
     ],
 };

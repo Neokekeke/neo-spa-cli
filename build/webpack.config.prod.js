@@ -12,6 +12,15 @@ module.exports = merge(base, {
     },
     optimization: {
         minimize: true,
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    name: 'vendor',
+                    test: /node_modules/,
+                    chunks: 'all'
+                }
+            }
+        },
         minimizer: [
             new TerserPlugin({
                 sourceMap: true,    // 开启sourceMap
