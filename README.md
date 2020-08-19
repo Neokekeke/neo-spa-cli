@@ -1,2 +1,6 @@
-# react-cli
-a react custom cli by Neokekeke
+# spa-cli
+
+# branch
+· master  -- base
+· vue     -- base + vue config
+· react   -- base + react config
