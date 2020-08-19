@@ -1,6 +1,7 @@
 # spa-cli
+custom cli supply for vue or react
 
 # branch
-· master  -- base
-· vue     -- base + vue config
-· react   -- base + react config
+· master  -- base <br>
+· vue     -- base + vue config <br>
+· react   -- base + react config <br>
