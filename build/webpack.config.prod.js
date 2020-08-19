@@ -5,6 +5,7 @@ const { merge } = require('webpack-merge');
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = merge(base, {
+    devtool: 'source-map',
     mode: 'production',
     entry: {
         app: [path.resolve(__dirname, '../src/index.js')],
@@ -13,7 +14,7 @@ module.exports = merge(base, {
         minimize: true,
         minimizer: [
             new TerserPlugin({
-                sourceMap: true,
+                sourceMap: true,    // 开启sourceMap
                 parallel: false,
                 terserOptions: {
                     ecma: 8,
