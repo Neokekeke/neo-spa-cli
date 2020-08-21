@@ -4,14 +4,22 @@ const { merge } = require('webpack-merge');
 const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = merge(base, {
-    devtool: 'source-map',
+    // devtool: 'source-map',
     mode: 'production',
     entry: {
         app: [path.resolve(__dirname, '../src/index.js')],
     },
+    output: {
+        filename: 'js/[name]_[contentHash:8].js', // contentHash 针对文件内容级别的修改，只有文件模块内容改变，hash值才会改变，合理加快打包和缓存
+        path: path.resolve(__dirname, '../dist'),
+        publicPath: '/'
+    },
     optimization: {
         minimize: true,
-        splitChunks: {
+        runtimeChunk: {
+            name: 'runtime' // 把runtime部分的代码抽离出来，单独打包能起到浏览器缓存作用，路由懒加载
+        },
+        splitChunks: {  // 抽取相同的vendor部分
             cacheGroups: {
                 commons: {
                     name: 'vendor',

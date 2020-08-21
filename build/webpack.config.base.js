@@ -17,11 +17,6 @@ const generateLinkOrStyleLoader = () => {
 };
 
 module.exports = {
-    output: {
-        filename: 'js/[name]_[hash:8].js', // contenthash 针对文件内容级别的修改，只有文件模块内容改变，hash值才会改变，合理加快打包和缓存
-        path: path.resolve(__dirname, '../dist'),
-        publicPath: '/'
-    },
     resolve: {
         extensions: ['.js', '.jsx'],
         alias: {
@@ -76,7 +71,7 @@ module.exports = {
         }),
 
         new MiniCssExtractPlugin({
-            filename: 'css/[name]_[contentHash:8].css',
+            filename: 'css/[name]_[contenthash:8].css',
         }),
     ],
 };

@@ -8,7 +8,7 @@
     "build-test": "rimraf dist && cross-env NODE_ENV=production webpack --config ./build/webpack.config.js --progress --profile --colors --display-error-details",
     "build-prod": "rimraf dist && cross-env NODE_ENV=production webpack --config ./build/webpack.config.js --progress --profile --colors --display-error-details",
     "analyz": "rimraf dist && cross-env NODE_ENV=production webpack --config ./build/webpack.config.analyz.js --progress --profile --colors --display-error-details",
-    "start-webpack-dev-server": "npm run build-dev && webpack-dev-server --open",
+    "start-webpack-dev-server": "webpack-dev-server --open",
     "start-express": "cross-env NODE_ENV=development node server.js",
     "rimraf": "rimraf dist"
   },
