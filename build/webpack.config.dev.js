@@ -13,7 +13,7 @@ module.exports = merge(base, {
         ],
     },
     output: {
-        filename: 'js/[name]_[contenthash:8].js', // contentHash 针对文件内容级别的修改，只有文件模块内容改变，hash值才会改变，合理加快打包和缓存
+        filename: 'js/[name]_[hash:8].js', // contentHash 针对文件内容级别的修改，只有文件模块内容改变，hash值才会改变，合理加快打包和缓存
         path: path.resolve(__dirname, '../dist'),
         publicPath: '/',
     },
