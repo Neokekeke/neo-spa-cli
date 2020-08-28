@@ -2,8 +2,12 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const isProd = process.env.NODE_ENV == 'production';
+
 // 添加PWA（progress web application）, service worker
 const WorkboxPlugin = require('workbox-webpack-plugin');
+
+// vue loader
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 // 根据环境使用不同loader <link> <-> <style>
 const generateLinkOrStyleLoader = () => {
@@ -23,10 +27,29 @@ module.exports = {
         extensions: ['.js', '.jsx'],
         alias: {
             '@util': path.resolve(__dirname, '../src/utils'),
+            vue$: 'vue/dist/vue.esm.js',
         },
     },
     module: {
         rules: [
+            {
+                test: /\.(js|vue)$/,
+                loader: 'eslint-loader',
+                enforce: 'pre',
+                include: [path.resolve('src'), path.resolve('test')],
+                options: {
+                    formatter: require('eslint-friendly-formatter')
+                }
+            },
+            {
+                test: /\.js?$/,
+                loader: 'babel-loader',
+                exclude: path.resolve(__dirname, '../node_modules')
+            },
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader',
+            },
             {
                 test: /\.(less|css)$/,
                 use: [
@@ -36,6 +59,7 @@ module.exports = {
                      * development 需要把css -> <style>标签插入到html中用 style-loader
                      */
                     generateLinkOrStyleLoader(), // style-loader creates style nodes from JS strings
+                    'vue-style-loader', //  .vue 文件中的 <style> 块
                     {
                         loader: 'css-loader', // translates CSS into CommonJS
                         options: {
@@ -48,7 +72,7 @@ module.exports = {
                     'postcss-loader', // process CSS with PostCSS addprefix
                     'less-loader', // compiles Less to CSS
                 ],
-                exclude: [path.resolve(__dirname, '../node_modules')],
+                exclude: path.resolve(__dirname, '../node_modules'),
             },
             {
                 test: /\.(jpe?g|png|gif|ico|woff|woff2|eot|ttf|svg|swf|otf)$/i,
@@ -65,6 +89,9 @@ module.exports = {
         ],
     },
     plugins: [
+        // vue loader plugin
+        new VueLoaderPlugin(),
+
         new HtmlWebpackPlugin({
             filename: path.resolve(__dirname, '../dist/index.html'), // 打包生成的文件名
             template: path.resolve(__dirname, '../src/template/index.html'), // 打包的html模板
