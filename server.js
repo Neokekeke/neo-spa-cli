@@ -1,3 +1,6 @@
+const fs = require('fs');
+const path = require('path');
+const http = require('http');
 const express = require('express');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -18,11 +21,14 @@ app.use(
 // use hot middleware
 app.use(webpackHotMiddleware(compiler));
 
-app.get('/', function (req, res) {
-    res.sendFile(__dirname + '..dist/index.html');
+app.get('/*', function(req, res){
+    var html = fs.readFileSync(path.resolve(__dirname, '../dist/index.html'), 'utf-8');
+    res.send(html);
 });
 
+const httpServer = http.createServer(app);
+
 // Serve the files on port 3066.
-app.listen(3066, function () {
+httpServer.listen(3066, function(){
     console.log('Example app listening on port 3066!\n');
 });

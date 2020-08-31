@@ -1,5 +1,6 @@
 {
     // Create a .babelrc config in your project root and enable some plugins.
     // 解析ES6
-    "presets": ["@babel/preset-env"]
+    "presets": ["@babel/preset-env"],
+    "plugins": ["@babel/plugin-syntax-dynamic-import"]
 }

@@ -3,15 +3,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const isProd = process.env.NODE_ENV == 'production';
 
-// 添加PWA（progress web application）, service worker
-const WorkboxPlugin = require('workbox-webpack-plugin');
-
 // vue loader
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
 // 根据环境使用不同loader <link> <-> <style>
 const generateLinkOrStyleLoader = () => {
-    if (isProd) {
+    if (isProd){
         return {
             loader: MiniCssExtractPlugin.loader,
             options: {
@@ -36,7 +33,7 @@ module.exports = {
                 test: /\.(js|vue)$/,
                 loader: 'eslint-loader',
                 enforce: 'pre',
-                include: [path.resolve('src'), path.resolve('test')],
+                include: path.resolve(__dirname, '../src'),
                 options: {
                     formatter: require('eslint-friendly-formatter')
                 }
@@ -101,14 +98,6 @@ module.exports = {
 
         new MiniCssExtractPlugin({
             filename: 'css/[name]_[contenthash:8].css',
-        }),
-
-        // service worker
-        new WorkboxPlugin.GenerateSW({
-            // 这些选项帮助 ServiceWorkers 快速启用
-            // 不允许遗留任何“旧的” ServiceWorkers
-            clientsClaim: true,
-            skipWaiting: true,
         }),
     ],
 };
