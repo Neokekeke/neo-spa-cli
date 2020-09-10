@@ -10,10 +10,25 @@
       </router-link>
     </div>
     <router-view></router-view>
+
+    <div
+      class="actions"
+      @click="handleGet"
+    >
+      get store name
+    </div>
+    <div
+      class="actions"
+      @click="handleSet"
+    >
+      set store name
+    </div>
+    <p>{{ storeName }}</p>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 export default {
     name: 'Index',
     data(){
@@ -21,7 +36,22 @@ export default {
             ROUTER_ENUM: ['/home', '/about', '/index']
         };
     },
+    computed: {
+        ...mapGetters({
+            storeName: 'storeName'
+        })
+    },
     methods: {
+        ...mapActions({
+            getStoreName: 'getStoreName',
+            setStoreName: 'setStoreName'
+        }),
+        handleGet(){
+            this.getStoreName();
+        },
+        handleSet(){
+          this.setStoreName('哈哈哈');
+        }
     }
 };
 </script>
