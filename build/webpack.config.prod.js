@@ -36,15 +36,15 @@ module.exports = merge(base, {
                             hmr: false, // hmr热更新
                         },
                     }, // style-loader creates style nodes from JS strings
-                    // {
-                    //     loader: 'css-loader', // translates CSS into CommonJS
-                    //     options: {
-                    //         modules: {
-                    //             mode: 'local', // enable css module 模块化
-                    //             localIdentName: '[local]_[hash:base64:8]', // 模块化名称
-                    //         },
-                    //     },
-                    // },
+                    {
+                        loader: 'css-loader', // translates CSS into CommonJS
+                        options: {
+                            modules: {
+                                mode: 'local', // enable css module 模块化
+                                localIdentName: '[local]_[hash:base64:8]', // 模块化名称
+                            },
+                        },
+                    },
                     'postcss-loader', // process CSS with PostCSS addprefix
                     'less-loader', // compiles Less to CSS
                 ],
