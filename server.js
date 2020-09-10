@@ -14,7 +14,7 @@ const compiler = webpack(config);
 // configuration file as a base.
 app.use(
     webpackDevMiddleware(compiler, {
-        publicPath: config.output.publicPath,
+        publicPath: config.output.publicPath
     })
 );
 
@@ -22,13 +22,33 @@ app.use(
 app.use(webpackHotMiddleware(compiler));
 
 app.get('/*', function(req, res){
-    var html = fs.readFileSync(path.resolve(__dirname, '../dist/index.html'), 'utf-8');
-    res.send(html);
+    // 访问spa其他路由时，本地的express访问的还是打包的html页面
+    // 开发环境可以和生产环境区分开
+    var html = path.resolve(__dirname, './src/index.html');
+    res.sendFile(html);
 });
 
 const httpServer = http.createServer(app);
+const port = 3066;
+
+var pathName = path.resolve(__dirname);
+fs.readdir(pathName, function(err, files){
+    var dirs = [];
+    (function iterator(i){
+      if(i == files.length){
+        console.log('------------ files lists ------------', '\n' , files, '\n');
+        return ;
+      }
+      fs.stat(path.join(pathName, files[i]), function(err, data){     
+        if(data.isFile()){               
+            dirs.push(files[i]);
+        }
+        iterator(i+1);
+       });   
+    })(0);
+});
 
 // Serve the files on port 3066.
-httpServer.listen(3066, function(){
-    console.log('Example app listening on port 3066!\n');
+httpServer.listen(port, function(){
+    console.log(`Example app listening on port ${port} !\n`);
 });
