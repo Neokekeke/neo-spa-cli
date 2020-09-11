@@ -7,7 +7,7 @@ module.exports = merge(base, {
     devtool: 'source-map',
     mode: 'production',
     entry: {
-        app: [path.resolve(__dirname, '../src/index.js')],
+        app: path.resolve(__dirname, '../src/container/index.js'),
     },
     output: {
         filename: 'js/[name]_[contentHash:8].js', // contentHash 针对文件内容级别的修改，只有文件模块内容改变，hash值才会改变，合理加快打包和缓存
