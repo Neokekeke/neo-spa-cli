@@ -5,9 +5,9 @@
       :key="index"
       class="route-warpper"
     >
-      <router-link :to="item">
+      <!-- <router-link :to="item">
         {{ item.split("/")[1] }}
-      </router-link>
+      </router-link> -->
     </div>
     <router-view></router-view>
 
@@ -15,13 +15,13 @@
       class="actions"
       @click="handleGet"
     >
-      get store name
+      Get store name
     </div>
     <div
       class="actions"
       @click="handleSet"
     >
-      set store name
+      Get store name
     </div>
     <p>{{ storeName }}</p>
   </div>
@@ -48,6 +48,9 @@ export default {
         }),
         handleGet(){
             this.getStoreName();
+            this.$router.push({
+              path: '/about'
+            });
         },
         handleSet(){
           this.setStoreName('哈哈哈');
@@ -57,12 +60,13 @@ export default {
 </script>
 
 <style lang="less" scoped>
+div {
+  margin-bottom: 20px;
+}
+
 .route-warpper {
     display: flex;
     flex-direction: column;
-
-    a {
-        margin-bottom: 20px;
-    }
+    overflow: hidden;
 }
 </style>

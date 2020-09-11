@@ -22,7 +22,7 @@ app.use(
 app.use(webpackHotMiddleware(compiler));
 
 app.get('/*', function(req, res){
-    // 访问spa其他路由时，本地的express访问的还是打包的html页面
+    // 访问spa其他路由时，本地的express访问的还是打包的html页面，分为两个模板打包
     // 开发环境可以和生产环境区分开
     var html = path.resolve(__dirname, './src/index.html');
     res.sendFile(html);
