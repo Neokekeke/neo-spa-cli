@@ -1,14 +1,10 @@
 const path = require('path');
 
-// vue loader
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
-
 module.exports = {
     resolve: {
-        extensions: ['.js', '.vue'],
+        extensions: ['.js', '.jsx'],
         alias: {
             '@util': path.resolve(__dirname, '../src/utils'),
-            vue$: 'vue/dist/vue.esm.js',
         },
     },
     module: {
@@ -25,11 +21,8 @@ module.exports = {
             {
                 test: /\.(js|jsx)$/,
                 loader: 'babel-loader',
+                include: path.resolve(__dirname, '../src'),
                 exclude: path.resolve(__dirname, '../node_modules')
-            },
-            {
-                test: /\.vue$/,
-                loader: 'vue-loader',
             },
             {
                 test: /\.(jpe?g|png|gif|ico|woff|woff2|eot|ttf|svg|swf|otf)$/i,
@@ -46,7 +39,5 @@ module.exports = {
         ],
     },
     plugins: [
-        // vue loader plugin
-        new VueLoaderPlugin(),
     ],
 };

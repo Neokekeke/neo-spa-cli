@@ -1,13 +1,14 @@
 {
     // Create a .babelrc config in your project root and enable some plugins.
-    
+
     // @babel/preset-env：即babel-preset-env
     // 根据您要支持的浏览器，决定使用哪些transformations / plugins 和 polyfills，例如为旧浏览器提供现代浏览器的新特性。
 
     // @babel/preset-react：即 babel-preset-react
     // 针对所有React插件的Babel预设，例如将JSX转换为函数
     "presets": [
-        "@babel/preset-env", 
-        "@babel/preset-react"
+        "@babel/preset-env",
+        "@babel/preset-react",
+        "@babel/plugin-proposal-class-properties"
     ]
 }
