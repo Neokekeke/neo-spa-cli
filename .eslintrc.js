@@ -6,6 +6,7 @@ module.exports = {
         'es2020': true,
         'node': true
     },
+    'parser': 'babel-eslint',
     'extends': [
         'eslint:recommended',   // 表示继承了 eslint 推荐的规则
         'plugin:react/recommended'

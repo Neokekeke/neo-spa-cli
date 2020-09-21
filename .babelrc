@@ -6,9 +6,6 @@
 
     // @babel/preset-react：即 babel-preset-react
     // 针对所有React插件的Babel预设，例如将JSX转换为函数
-    "presets": [
-        "@babel/preset-env",
-        "@babel/preset-react",
-        "@babel/plugin-proposal-class-properties"
-    ]
+    "presets": ["@babel/preset-env", "@babel/preset-react"],
+    "plugins": ["@babel/plugin-proposal-class-properties"]
 }

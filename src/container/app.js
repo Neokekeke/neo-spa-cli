@@ -1,6 +1,6 @@
 import React from 'react';
 import app from './app.less';
-import { add } from '../store/common/actions';
+import { add } from '../store/rootStore/actions';
 
 class App extends React.Component {
     constructor(props) {
@@ -8,11 +8,12 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        console.warn('yes app mount', app);
+        console.warn('yes app and style mount', app);
     }
 
     handleClick = () => {
         add();
+        console.log('click');
     }
 
     render() {

@@ -5,6 +5,7 @@ const express = require('express');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
+const open = require('open');
 
 const app = express();
 const config = require('./build/webpack.config');
@@ -51,4 +52,5 @@ fs.readdir(pathName, function(err, files){
 // Serve the files on port 3066.
 httpServer.listen(port, function(){
     console.log(`Example app listening on port ${port} !\n`);
+    open('http://localhost:3066');
 });
