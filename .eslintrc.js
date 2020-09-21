@@ -24,5 +24,6 @@ module.exports = {
     'rules': {
         semi: ['warn', 'always'], //语句强制用分号结尾
         quotes: [1, 'single'], //引号类型 `` "" ''
+        // 'react/prop-types': 0 // 禁用react propsType 规范类型检测
     }   
 };

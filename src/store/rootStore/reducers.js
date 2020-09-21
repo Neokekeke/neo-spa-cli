@@ -6,12 +6,9 @@ const initialState = fromJS({
 });
 
 export default function (state = initialState, actions) {
-    console.log('state', state);
-    console.log('actions', actions);
-
     switch(actions.type) {
         case 'ADD':
-            return state;
+            return state.get('count') + 1;
         
         default:
             return state;

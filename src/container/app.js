@@ -1,6 +1,10 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import app from './app.less';
-import { add } from '../store/rootStore/actions';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { add } from '@src/store/rootStore/actions';
+import { selectorCount } from '@src/store/rootStore/selectors.js';
 
 class App extends React.Component {
     constructor(props) {
@@ -12,16 +16,36 @@ class App extends React.Component {
     }
 
     handleClick = () => {
-        add();
-        console.log('click');
-    }
+        // this.props.add();
+        console.log('click', this.props);
+    };
 
     render() {
-        return <div className={app.container}>
-            <p>app index</p>
-            <p onClick={this.handleClick}>点击</p>
-        </div>;
+        return (
+            <div className={app.container}>
+                <p>app index</p>
+                <p onClick={this.handleClick}>点击</p>
+                <p>{this.props.count}</p>
+            </div>
+        );
     }
 }
 
-export default App;
+const mapStateToProps = state => {
+    return {
+        count: selectorCount()
+    };
+};
+const mapDispatchToProps = dispatch => {
+    return {
+        add: dispatch(add())
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+// propTypes 规范类型检测
+App.propTypes = {
+    count: PropTypes.number,
+    add: PropTypes.object
+};
