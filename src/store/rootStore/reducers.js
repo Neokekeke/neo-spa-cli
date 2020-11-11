@@ -8,8 +8,9 @@ const initialState = fromJS({
 export default function (state = initialState, actions) {
     switch(actions.type) {
         case 'ADD':
-            return state.get('count') + 1;
-        
+            return state.set('count', state.get('count')  + actions.count);
+        case 'MINUS':
+            return state.set('count', state.get('count')  - actions.count);
         default:
             return state;
     }

@@ -3,42 +3,58 @@ import React from 'react';
 import app from './app.less';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { add } from '@src/store/rootStore/actions';
-import { selectorCount } from '@src/store/rootStore/selectors.js';
+import { add, minus } from '@src/store/rootStore/actions';
+import { selectorCountData } from '@src/store/rootStore/selectors.js';
 
 class App extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {};
     }
 
     componentDidMount() {
-        console.warn('yes app and style mount', app);
+        console.warn('Yes App And Style Mount', app);
     }
 
-    handleClick = () => {
-        // this.props.add();
-        console.log('click', this.props);
+    handleAdd = () => {
+        this.props.add();
+    };
+
+    handleMinus = () => {
+        this.props.minus();
     };
 
     render() {
+        const { count } = this.props;
+        console.log('this.props', this.props);
+
         return (
             <div className={app.container}>
-                <p>app index</p>
-                <p onClick={this.handleClick}>点击</p>
-                <p>{this.props.count}</p>
+                <p>Counter</p>
+                <div className={app.controller}>
+                    <p className={app.add} onClick={this.handleAdd}>
+                        add
+                    </p>
+                    <p className={app.minus} onClick={this.handleMinus}>
+                        minus
+                    </p>
+                </div>
+                <p>{count}</p>
             </div>
         );
     }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
-        count: selectorCount()
+        count: selectorCountData(state),
     };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
     return {
-        add: dispatch(add())
+        add: () => dispatch(add()),
+        minus: () => dispatch(minus()),
     };
 };
 
@@ -47,5 +63,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(App);
 // propTypes 规范类型检测
 App.propTypes = {
     count: PropTypes.number,
-    add: PropTypes.object
+    add: PropTypes.func,
+    minus: PropTypes.func,
 };
