@@ -1,6 +1,8 @@
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { createLogger } from 'redux-logger';
-import reducers from './reducers';
+import allReducers from './root.reducer.js';
+
+const reducers = combineReducers(allReducers);
 
 const logger = createLogger({
     // ...options
