@@ -1,8 +1,8 @@
-import globalReducers from './global/reducers';
+import global from './global/reducers';
 
 // 根reducer
-const allReducers = {
-    globalReducers
+const rootReducers = {
+    global
 };
 
-export default allReducers;
+export default rootReducers;

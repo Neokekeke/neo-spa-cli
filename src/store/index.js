@@ -1,9 +1,13 @@
-import { applyMiddleware, createStore, combineReducers } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+import { combineReducers } from 'redux-immutable';
 import { createLogger } from 'redux-logger';
-import allReducers from './root.reducer.js';
+import rootReducer  from './root.reducer.js';
 
-const reducers = combineReducers(allReducers);
+const reducers = combineReducers(rootReducer);
 
+console.log('rootReducers', rootReducer);
+
+// 日志
 const logger = createLogger({
     // ...options
 });

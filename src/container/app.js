@@ -3,8 +3,10 @@ import React from 'react';
 import app from './app.less';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+//selectors
+import { createStructuredSelector } from 'reselect';
 import { add, minus } from '@src/store/global/actions.js';
-import { selectorCountData } from '@src/store/global/selectors.js';
+import { selectorCount } from '@src/store/global/selectors.js';
 
 class App extends React.Component {
     constructor(props) {
@@ -46,11 +48,10 @@ class App extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        count: selectorCountData(state),
-    };
-};
+const mapStateToProps = createStructuredSelector({
+    count: selectorCount(),
+});
+
 const mapDispatchToProps = (dispatch) => {
     return {
         add: () => dispatch(add()),
