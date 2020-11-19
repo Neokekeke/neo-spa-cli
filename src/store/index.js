@@ -5,17 +5,24 @@ import rootReducer  from './root.reducer.js';
 
 const reducers = combineReducers(rootReducer);
 
-console.log('rootReducers', rootReducer);
+// 中间件数组
+const middlewareList = [];
 
 // 日志
 const logger = createLogger({
     // ...options
 });
   
+if (process.env.NODE_ENV == 'development') {
+    middlewareList.push(logger);
+}
+
 // redux create store
 const store = createStore(
     reducers, 
-    applyMiddleware(logger)
+    applyMiddleware(...middlewareList)
 );
+
+console.log('------------[storestore]------------' + '\n', store.getState().toJS());
 
 export default store;
