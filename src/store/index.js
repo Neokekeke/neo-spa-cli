@@ -1,5 +1,6 @@
 import { applyMiddleware, createStore } from 'redux';
 import { combineReducers } from 'redux-immutable';
+import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import rootReducer  from './root.reducer.js';
 
@@ -23,6 +24,6 @@ const store = createStore(
     applyMiddleware(...middlewareList)
 );
 
-console.log('------------[storestore]------------' + '\n', store.getState().toJS());
+console.warn('------------[storestore]------------' + '\n', store.getState().toJS(), '\n' + '-----------------------------------');
 
 export default store;

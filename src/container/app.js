@@ -8,6 +8,9 @@ import { createStructuredSelector } from 'reselect';
 import { add, minus } from '@src/store/global/actions.js';
 import { selectorCount } from '@src/store/global/selectors.js';
 
+//test.js
+import { testCurry1, testCurry2, testReduce } from '../utils/_test';
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -16,6 +19,7 @@ class App extends React.Component {
     }
 
     componentDidMount() {
+        testReduce();
         console.warn('Yes App And Style Mount', app);
     }
 

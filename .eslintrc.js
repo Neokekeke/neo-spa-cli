@@ -26,12 +26,15 @@ module.exports = {
         quotes: [1, 'single'], //引号类型 `` "" ''
         // 'react/prop-types': 0 // 禁用react propsType 规范类型检测
         'func-names': [0],
+        'no-plusplus': ['error', { allowForLoopAfterthoughts: true }],
         'no-console': [0],
         'no-alert': [0],
         'no-bitwise': [0],
         'eqeqeq': [0],
         'object-shorthand': [0],
+        'object-curly-newline': ['off'],
         'prefer-arrow-callback': [0],
+        'import/no-duplicates': [0],
         'import/no-unresolved': [0],
         'import/no-extraneous-dependencies': [0],
         'no-unused-vars': [0],
@@ -45,8 +48,15 @@ module.exports = {
         'no-unused-expressions': ['error', { 'allowShortCircuit': true }],
         'no-underscore-dangle': [0],
         'linebreak-style': [0, 'windows'],
-        'indent': ['error', 4, { 'SwitchCase': 1 }],
-        'no-trailing-spaces': [0],
+        indent: [
+            'error',
+            4,
+            { SwitchCase: 1, ignoredNodes: ['ConditionalExpression'] }
+        ],
+        'array-bracket-spacing': [0],
+        'spaced-comment': [0],
+        'space-before-function-paren': [0],
+        // 'no-trailing-spaces': [0],
         'comma-dangle': ['error', 'only-multiline'],
         'comma-spacing': ['error', { 'before': false, 'after': true }],
         'prefer-template': [0],
