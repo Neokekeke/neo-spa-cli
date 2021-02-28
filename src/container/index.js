@@ -10,8 +10,13 @@ import ReactDom from 'react-dom';
 import store from '../store/index';
 import { Provider } from 'react-redux';
 
+// 错误边界捕获 errorBoundary
+import ErrorBoundary from './errorBoundary';
+
 ReactDom.render(
     <Provider store={store}>
-        <App />
+        <ErrorBoundary>
+            <App />
+        </ErrorBoundary>
     </Provider>
     , document.getElementById('root'));
