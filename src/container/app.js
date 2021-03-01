@@ -14,6 +14,7 @@ import ThemeContainer from './theme/themeContainer';
 import { throttle } from '../utils/throttle';
 import { debounce } from '../utils/debounce';
 // import _ from 'lodash';
+import { CloneElement, CreateElement } from '../utils/testReact/testReactApi';
 
 // logger hoc
 import LoggerHoc from '../component/logHoc';
@@ -67,7 +68,12 @@ class App extends React.Component {
                     <Com1 name={name}><div>666</div></Com1>
                     <Com2 name={name} />
                 </Suspense> */}
-                
+                <CreateElement/>
+                <CloneElement>
+                    <CreateElement/>
+                    <div>clone children111</div>
+                    <div>clone children222</div>
+                </CloneElement>
                 <ThemeContext.Provider value={{ ...this.state }}>
                     <ThemeContainer />
                 </ThemeContext.Provider>

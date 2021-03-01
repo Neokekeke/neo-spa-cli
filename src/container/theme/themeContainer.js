@@ -7,7 +7,7 @@ import ThemeConsumer from './themeConsumer';
 export default function ThemeContainer() {
     console.warn('this is ThemeContainer and do nothing');
     return <Fragment>
-        ThemeContainer: 
+        <div>ThemeContainer ==》</div>
         <ThemeConsumer/>
     </Fragment>;    
 }

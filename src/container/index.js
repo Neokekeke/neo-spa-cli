@@ -5,7 +5,7 @@
 // import { obserable } from 'mobx-react';
 
 import App from './app';
-import React from 'react';
+import React, { StrictMode }from 'react';
 import ReactDom from 'react-dom';
 import store from '../store/index';
 import { Provider } from 'react-redux';
@@ -14,9 +14,13 @@ import { Provider } from 'react-redux';
 import ErrorBoundary from './errorBoundary';
 
 ReactDom.render(
+
     <Provider store={store}>
         <ErrorBoundary>
-            <App />
+            <StrictMode>
+                <App />
+            </StrictMode>
         </ErrorBoundary>
     </Provider>
+
     , document.getElementById('root'));

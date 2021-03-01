@@ -3,7 +3,7 @@ import {
     ThemeContext
 } from '../app';
 
-export default function ThemeConsumer() {
+export default function ThemeConsumer(props) {
     console.warn('this is ThemeConsumer receive context from app');
 
     return <ThemeContext.Consumer>
@@ -16,3 +16,7 @@ export default function ThemeConsumer() {
         }
     </ThemeContext.Consumer>;
 }
+
+ThemeConsumer.defaultProps = {
+    
+};
