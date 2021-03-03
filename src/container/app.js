@@ -22,6 +22,9 @@ import LoggerHoc from '../component/logHoc';
 // Suspense 是懒加载的容器，定义了在懒加载前可以做的事情，比如loading，结合路由使用
 // const Com1 = lazy(() => import('./com1')); //懒加载
 
+// com
+import { Todo, TodoList } from '../utils/testReact/testReactHook';
+
 export const ThemeContext = React.createContext();
 
 @LoggerHoc(666)
@@ -77,6 +80,11 @@ class App extends React.Component {
                 <ThemeContext.Provider value={{ ...this.state }}>
                     <ThemeContainer />
                 </ThemeContext.Provider>
+
+                <div>--------------</div>
+                <Todo>
+                    <TodoList />
+                </Todo>
             </div>
         );
     }
