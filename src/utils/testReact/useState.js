@@ -17,7 +17,7 @@ export function TodoList(props) {
 
 // useState
 export function Todo(props) {
-    const { val, setVal } = useState(false);
+    const [ val, setVal ] = useState(false);
     const toggle = setVal(!val);
 
     const childrenEle = React.Children(props.children, child => {

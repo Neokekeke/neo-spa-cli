@@ -22,8 +22,22 @@ import LoggerHoc from '../component/logHoc';
 // Suspense 是懒加载的容器，定义了在懒加载前可以做的事情，比如loading，结合路由使用
 // const Com1 = lazy(() => import('./com1')); //懒加载
 
-// com
-import { Todo, TodoList } from '../utils/testReact/testReactHook';
+// PureComponent compare Component
+import PureCom from './classComponent/pureCom';
+import NormalCom from './classComponent/com';
+
+// shouldComponentUpdate and React.memo
+import { MemoCom, Com2 } from './funcComponent/memoCom';
+
+// function com
+// import { Todo, TodoList } from '../utils/testReact/testReactHook';
+
+// hook
+import { TestUseEffect } from '../utils/testReact/useEffect';
+import { User1, User2 } from '../utils/testReact/useCustom';
+import { TestContext } from '../utils/testReact/useContext';
+import { Counter } from '../utils/testReact/useReducer';
+import {TestPromise} from '../utils/testJs/promise';
 
 export const ThemeContext = React.createContext();
 
@@ -50,6 +64,12 @@ class App extends React.Component {
         this.props.minus();
     }, 2000);
 
+    handleChangeState = (key, val) => {
+        this.setState({
+            [key]: val
+        });
+    }
+
     render() {
         const { count } = this.props;
         const { name } = this.state;
@@ -71,7 +91,12 @@ class App extends React.Component {
                     <Com1 name={name}><div>666</div></Com1>
                     <Com2 name={name} />
                 </Suspense> */}
-                <CreateElement/>
+
+                {/* <PureCom name={this.state.name}/>
+                <NormalCom name={this.state.name}/> */}
+                <div>-----------------------------------------</div>
+
+                {/* <CreateElement/>
                 <CloneElement>
                     <CreateElement/>
                     <div>clone children111</div>
@@ -79,12 +104,24 @@ class App extends React.Component {
                 </CloneElement>
                 <ThemeContext.Provider value={{ ...this.state }}>
                     <ThemeContainer />
-                </ThemeContext.Provider>
+                </ThemeContext.Provider> */}
 
-                <div>--------------</div>
-                <Todo>
+                <div>-----------------------------------------</div>
+                {/* <Todo>
                     <TodoList />
-                </Todo>
+                </Todo> */}
+
+                {/* <div onClick={() => this.handleChangeState('name', '666')}>changeState</div>
+                <MemoCom name={name}/>
+                <Com2 name={name}/>
+
+                <TestUseEffect />
+
+                <User1 />
+                <User2 /> */}
+
+                {/* <TestContext />
+                <Counter /> */}
             </div>
         );
     }

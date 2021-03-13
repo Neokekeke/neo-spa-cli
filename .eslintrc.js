@@ -9,7 +9,8 @@ module.exports = {
     'parser': 'babel-eslint',
     'extends': [
         'eslint:recommended',   // 表示继承了 eslint 推荐的规则
-        'plugin:react/recommended'
+        'plugin:react/recommended',
+        'plugin:react-hooks/recommended'
     ],
     'parserOptions': {
         'ecmaFeatures': {
@@ -19,7 +20,8 @@ module.exports = {
         'sourceType': 'module'
     },
     'plugins': [
-        'react'
+        'react',
+        'react-hooks'
     ],
     'rules': {
         semi: ['warn', 'always'], //语句强制用分号结尾
@@ -60,6 +62,8 @@ module.exports = {
         }],
         'import/prefer-default-export': [0],
         // allow debugger during development
-        'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0
+        'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+        'react-hooks/rules-of-hooks': 'error',
+        'react-hooks/exhaustive-deps': 'warn'
     }   
 };
