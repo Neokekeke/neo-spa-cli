@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { Suspense, lazy } from 'react';
 import app from './app.less';
@@ -73,7 +74,7 @@ class App extends React.Component {
     render() {
         const { count } = this.props;
         const { name } = this.state;
-        // console.log('this.props', this.props, this);
+        console.log('this.props', this.props, this);
 
         return (
             <div className={app.container}>
@@ -122,6 +123,8 @@ class App extends React.Component {
 
                 {/* <TestContext />
                 <Counter /> */}
+                <div>home page</div> 
+                {this.props.children}
             </div>
         );
     }
