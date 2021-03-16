@@ -8,7 +8,7 @@ import App from './app';
 import React, { StrictMode }from 'react';
 import ReactDom from 'react-dom';
 import store from '../store/index';
-import { Provider } from 'react-redux';
+import { Provider } from 'react-redux'; // 类似于Context.Provider 对应的子组件都是 Context.Consumer
 
 // 错误边界捕获 errorBoundary
 import ErrorBoundary from './errorBoundary';

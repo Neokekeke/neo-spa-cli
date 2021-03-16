@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 //selectors
 import { createStructuredSelector } from 'reselect';
-import { add, minus } from '@src/store/global/actions.js';
+import * as Actions from '@src/store/global/actions.js';
 import { selectorCount } from '@src/store/global/selectors.js';
 import ThemeContainer from './theme/themeContainer';
 
@@ -39,6 +39,9 @@ import { TestContext } from '../utils/testReact/useContext';
 import { Counter } from '../utils/testReact/useReducer';
 import {TestPromise} from '../utils/testJs/promise';
 
+// callApi
+import { getX } from '../xhr/callApi';
+
 export const ThemeContext = React.createContext();
 
 @LoggerHoc(666)
@@ -47,11 +50,12 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            name: '我最帅'
+            name: '我最帅',
+            githubData: {}
         };
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         console.warn('Yes App And Style Mount', app);
     }
 
@@ -70,14 +74,31 @@ class App extends React.Component {
         });
     }
 
+    handleGetApi = async () => {
+        const res = await getX('https://api.github.com/');
+        this.setState({
+            githubData: res.data
+        }, () => {
+            console.log('github res', this.state.githubData);
+        });
+    }
+
+    handleGetApi2 = () => {
+        this.props.mutiplys();
+    }
+
     render() {
         const { count } = this.props;
-        const { name } = this.state;
+        const { name, githubData } = this.state;
         // console.log('this.props', this.props, this);
 
         return (
             <div className={app.container}>
-                {/* <p>Counter</p>
+                <p onClick={this.handleGetApi}>click</p>
+                <p onClick={this.handleGetApi2}>click2</p>
+                {githubData.authorizations_url}
+
+                <p>Counter</p>
                 <div className={app.controller}>
                     <p className={app.add} onClick={() => this.handleAdd(666)}>
                         add
@@ -87,10 +108,6 @@ class App extends React.Component {
                     </p>
                 </div>
                 <p>{count}</p>
-                <Suspense fallback={<div>loading.......</div>}>
-                    <Com1 name={name}><div>666</div></Com1>
-                    <Com2 name={name} />
-                </Suspense> */}
 
                 {/* <PureCom name={this.state.name}/>
                 <NormalCom name={this.state.name}/> */}
@@ -126,16 +143,14 @@ class App extends React.Component {
         );
     }
 }
-
 const mapStateToProps = createStructuredSelector({
     count: selectorCount(),
 });
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        add: () => dispatch(add()),
-        minus: () => dispatch(minus()),
-    };
+const mapDispatchToProps = {
+    add: Actions.add,
+    minus: Actions.minus,
+    mutiplys: Actions.mutiplys
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
@@ -145,4 +160,5 @@ App.propTypes = {
     count: PropTypes.number,
     add: PropTypes.func,
     minus: PropTypes.func,
+    mutiplys: PropTypes.func
 };
