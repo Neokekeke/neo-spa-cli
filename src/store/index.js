@@ -2,11 +2,12 @@ import { applyMiddleware, createStore } from 'redux';
 import { combineReducers } from 'redux-immutable';
 import { createLogger } from 'redux-logger';
 import rootReducer  from './root.reducer.js';
+import thunk from 'redux-thunk';
 
 const reducers = combineReducers(rootReducer);
 
 // 中间件数组
-const middlewareList = [];
+const middlewareList = [thunk];
 
 // 日志
 const logger = createLogger({
