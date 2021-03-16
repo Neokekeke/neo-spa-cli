@@ -37,7 +37,8 @@ import { TestUseEffect } from '../utils/testReact/useEffect';
 import { User1, User2 } from '../utils/testReact/useCustom';
 import { TestContext } from '../utils/testReact/useContext';
 import { Counter } from '../utils/testReact/useReducer';
-import {TestPromise} from '../utils/testJs/promise';
+import { TestPromise } from '../utils/testJs/promise';
+import '../utils/testJs/prototype';
 
 export const ThemeContext = React.createContext();
 
@@ -122,6 +123,9 @@ class App extends React.Component {
 
                 {/* <TestContext />
                 <Counter /> */}
+                <div className={app['container-div']}>
+                    <div className={app['float-div']}>浮动的div</div>
+                </div>
             </div>
         );
     }
