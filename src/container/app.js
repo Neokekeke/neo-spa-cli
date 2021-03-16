@@ -39,6 +39,9 @@ import { TestContext } from '../utils/testReact/useContext';
 import { Counter } from '../utils/testReact/useReducer';
 import {TestPromise} from '../utils/testJs/promise';
 
+// test js
+import '../utils/testJs/reduce';
+
 // callApi
 import { getX } from '../xhr/callApi';
 
