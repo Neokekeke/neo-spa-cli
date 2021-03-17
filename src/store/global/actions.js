@@ -37,8 +37,13 @@ export const mutiplys = (payload) => {
     };
 };
 
-export const testSaga = () => {
+export const SYNC_SAGA_ADD_REQUEST = 'GLOBAL_SYNC_SAGA_ADD_REQUEST';
+export const SYNC_SAGA_ADD_SUCCESS = 'GLOBAL_SYNC_SAGA_ADD_SUCCESS';
+export const SYNC_SAGA_ADD_FAILED = 'GLOBAL_SYNC_SAGA_ADD_FAILED';
+
+export const SYNC_ADD = () => {
     return {
-        type: TEST_SAGA
+        type: SYNC_SAGA_ADD_REQUEST,
+        payload: 100
     };
 };

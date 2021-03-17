@@ -8,18 +8,18 @@ import {
     delay,
 } from 'redux-saga/effects';
 
-function* syncAdd(payload) {
-    console.log('payload--saga', payload);
+function* syncAdd(data) {
     try {
-        // yield delay(2000);
-        yield put({ type: 'SYNC_SAGA_ADD', payload });
+        yield delay(2000);
+        yield put({ type: 'SYNC_SAGA_ADD_SUCCESS', payload: data.payload });
     } catch (e) {
+        yield put({ type: 'SYNC_SAGA_ADD_FAILED', payload: data.payload });
         console.log('error', e);
     }
 }
 
 function* watchAll() {
-    yield takeLatest('SYNC_SAGA_ADD', syncAdd);
+    yield takeEvery('SYNC_SAGA_ADD_REQUEST', syncAdd);
 }
 
 export default function* sagas() {

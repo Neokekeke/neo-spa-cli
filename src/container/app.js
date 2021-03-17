@@ -93,9 +93,9 @@ class App extends React.Component {
 
         return (
             <div className={app.container}>
-                {/* <p onClick={this.handleTestSaga}>test saga</p>
+                <p onClick={this.handleTestSaga}>test saga</p>
                 {githubData.authorizations_url}
-                <p>{count}</p> */}
+                <p>{count}</p>
                 <TestSagaCom />
             </div>
         );
@@ -109,7 +109,7 @@ const mapDispatchToProps = {
     add: Actions.add,
     minus: Actions.minus,
     mutiplys: Actions.mutiplys,
-    testSaga: Actions.testSaga
+    testSaga: Actions.SYNC_ADD
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

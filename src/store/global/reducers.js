@@ -2,10 +2,12 @@ import { fromJS } from 'immutable';
 
 // state
 const initialState = fromJS({
-    count: 1
+    count: 1,
+    name: 'global'
 });
 
 export default function (state = initialState, actions) {
+    console.log('statestate', state.toJS());
     switch(actions.type) {
         case 'ADD':
             return state.set('count', state.get('count')  + actions.count);
@@ -22,12 +24,10 @@ export default function (state = initialState, actions) {
             console.log('MUTIPLY_FAILED', actions.data);
             return state;
 
-        case 'TEST_SAGA':
-            console.log('TEST_SAGA');
+        case 'GLOBAL_SYNC_SAGA_ADD_SUCCESS':
+            return state.set('count', state.get('count') + actions.payload);
+        case 'GLOBAL_SYNC_SAGA_ADD_FAILED':
             return state;
-        case 'SET_SAGA':
-            console.log('SET_SAGA');
-            return state.set('count', state.get('count')  + 666);
         default:
             return state;
     }

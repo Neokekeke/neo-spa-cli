@@ -12,6 +12,7 @@ const reducers = combineReducers(rootReducer);
 // 日志
 const logger = createLogger({
     // ...options
+    collapsed: true
 });
 
 // saga: saga的意思就是任务列表，可以表示为任务列表的集合，sagaMiddleWare

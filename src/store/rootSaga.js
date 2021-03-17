@@ -2,8 +2,7 @@
  * redux saga
  */
 import testSagas from './testSaga/sagas';
+import globlSagas from './global/sagas';
 
-function* rootSagas() {
-    yield [testSagas];
-}
+const rootSagas = [globlSagas, testSagas];
 export default rootSagas;
