@@ -40,10 +40,12 @@ import { Counter } from '../utils/testReact/useReducer';
 import {TestPromise} from '../utils/testJs/promise';
 
 // test js
-import '../utils/testJs/reduce';
+// import '../utils/testJs/reduce';
 
 // callApi
 import { getX } from '../xhr/callApi';
+
+import TestSagaCom from './testSagaCom';
 
 export const ThemeContext = React.createContext();
 
@@ -77,71 +79,24 @@ class App extends React.Component {
         });
     }
 
-    handleGetApi = async () => {
-        const res = await getX('https://api.github.com/');
-        this.setState({
-            githubData: res.data
-        }, () => {
-            console.log('github res', this.state.githubData);
-        });
-    }
-
     handleGetApi2 = () => {
         this.props.mutiplys();
     }
 
+    handleTestSaga  = () => {
+        this.props.testSaga();
+    }
+
     render() {
         const { count } = this.props;
-        const { name, githubData } = this.state;
-        // console.log('this.props', this.props, this);
+        const { githubData } = this.state;
 
         return (
             <div className={app.container}>
-                <p onClick={this.handleGetApi}>click</p>
-                <p onClick={this.handleGetApi2}>click2</p>
+                {/* <p onClick={this.handleTestSaga}>test saga</p>
                 {githubData.authorizations_url}
-
-                <p>Counter</p>
-                <div className={app.controller}>
-                    <p className={app.add} onClick={() => this.handleAdd(666)}>
-                        add
-                    </p>
-                    <p className={app.minus} onClick={this.handleMinus}>
-                        minus
-                    </p>
-                </div>
-                <p>{count}</p>
-
-                {/* <PureCom name={this.state.name}/>
-                <NormalCom name={this.state.name}/> */}
-                <div>-----------------------------------------</div>
-
-                {/* <CreateElement/>
-                <CloneElement>
-                    <CreateElement/>
-                    <div>clone children111</div>
-                    <div>clone children222</div>
-                </CloneElement>
-                <ThemeContext.Provider value={{ ...this.state }}>
-                    <ThemeContainer />
-                </ThemeContext.Provider> */}
-
-                <div>-----------------------------------------</div>
-                {/* <Todo>
-                    <TodoList />
-                </Todo> */}
-
-                {/* <div onClick={() => this.handleChangeState('name', '666')}>changeState</div>
-                <MemoCom name={name}/>
-                <Com2 name={name}/>
-
-                <TestUseEffect />
-
-                <User1 />
-                <User2 /> */}
-
-                {/* <TestContext />
-                <Counter /> */}
+                <p>{count}</p> */}
+                <TestSagaCom />
             </div>
         );
     }
@@ -153,7 +108,8 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
     add: Actions.add,
     minus: Actions.minus,
-    mutiplys: Actions.mutiplys
+    mutiplys: Actions.mutiplys,
+    testSaga: Actions.testSaga
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
@@ -163,5 +119,6 @@ App.propTypes = {
     count: PropTypes.number,
     add: PropTypes.func,
     minus: PropTypes.func,
-    mutiplys: PropTypes.func
+    mutiplys: PropTypes.func,
+    testSaga: PropTypes.func
 };

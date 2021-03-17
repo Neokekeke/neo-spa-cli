@@ -21,6 +21,13 @@ export default function (state = initialState, actions) {
         case 'MUTIPLY_FAILED':
             console.log('MUTIPLY_FAILED', actions.data);
             return state;
+
+        case 'TEST_SAGA':
+            console.log('TEST_SAGA');
+            return state;
+        case 'SET_SAGA':
+            console.log('SET_SAGA');
+            return state.set('count', state.get('count')  + 666);
         default:
             return state;
     }

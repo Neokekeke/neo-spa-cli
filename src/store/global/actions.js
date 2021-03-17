@@ -5,6 +5,8 @@ const ADD = 'ADD';
 // MINUS
 const MINUS = 'MINUS';
 
+const TEST_SAGA = 'TEST_SAGA';
+
 export const add = () => {
     return {
         type: ADD,
@@ -32,5 +34,11 @@ export const mutiplys = (payload) => {
         }).catch(err => {
             dispatch(MUTIPLY_FAILED(err));
         });
+    };
+};
+
+export const testSaga = () => {
+    return {
+        type: TEST_SAGA
     };
 };
