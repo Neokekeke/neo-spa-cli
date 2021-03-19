@@ -10,13 +10,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = merge(base, {
-    // devtool: 'source-map',
+    devtool: 'cheap-module-source-map',
     mode: 'production',
     entry: {
         app: path.resolve(__dirname, '../src/container/index.js'),
     },
     output: {
         filename: 'js/[name]_[contentHash:8].js', // contentHash 针对文件内容级别的修改，只有文件模块内容改变，hash值才会改变，合理加快打包和缓存
+        chunkFilename: 'chunks/[name].chunk.js', // 按需加载配置
         path: path.resolve(__dirname, '../dist'),
         publicPath: '/'
     },

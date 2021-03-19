@@ -39,7 +39,7 @@ export default class RouterApp extends React.Component {
         return <React.Fragment>
             <Router>
                 <Switch>
-                    <Route exact={true} path="/" component={App}></Route>
+                    <Route exact={true} path="/" component={() => import(App)}></Route>
                     <Route path="/a" component={APage}></Route>
                     <Route path="/b/:path?/:id?" component={BPage}></Route>
                     <Route path="*" component={NotFoundPage}></Route>

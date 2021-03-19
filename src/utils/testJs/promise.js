@@ -59,13 +59,13 @@ function mainPromise(type) {
     });
 }
 
-function testMain() {
-    const a = Promise.any([ mainPromise(10), mainPromise(1),  mainPromise(2)]);
-    a.then(res=>{
+// function testMain() {
+//     const a = Promise.any([ mainPromise(10), mainPromise(1),  mainPromise(2)]);
+//     a.then(res=>{
      
-        console.log('allaaa', res);
+//         console.log('allaaa', res);
  
-    });
-}
+//     });
+// }
 
-testMain();
+// testMain();

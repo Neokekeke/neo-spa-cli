@@ -4,7 +4,7 @@
 // jsx
 // import { obserable } from 'mobx-react';
 
-import RouterApp from './routerApp';
+import RoutesForApp from '../routes/routesForApp';
 import React, { StrictMode }from 'react';
 import ReactDom from 'react-dom';
 import store from '../store/index';
@@ -28,7 +28,7 @@ ReactDom.render(
     <Provider store={store}>
         <ErrorBoundary>
             {/* <StrictMode> */}
-            <RouterApp />
+            <RoutesForApp />
             {/* </StrictMode> */}
         </ErrorBoundary>
     </Provider>
