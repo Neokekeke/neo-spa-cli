@@ -17,9 +17,9 @@ module.exports = merge(base, {
     },
     output: {
         filename: 'js/[name]_[contentHash:8].js', // contentHash 针对文件内容级别的修改，只有文件模块内容改变，hash值才会改变，合理加快打包和缓存
-        chunkFilename: 'chunks/[name].chunk.js', // 按需加载配置
+        chunkFilename: 'chunks/[name]_[contentHash:8].chunk.js', // 按需加载配置
         path: path.resolve(__dirname, '../dist'),
-        publicPath: '/'
+        publicPath: '/',
     },
     module: {
         rules: [
@@ -95,15 +95,16 @@ module.exports = merge(base, {
             skipWaiting: true,
         }),
 
+        new MiniCssExtractPlugin({
+            filename: 'css/[name]_[contenthash:8].css',
+        }),
+
         new HtmlWebpackPlugin({
             filename: path.resolve(__dirname, '../dist/index.html'), // 打包生成的文件名
             template: path.resolve(__dirname, '../src/template/index.html'), // 打包的html模板
             inject: true, // body的底部注入js
             minify: process.env.NODE_ENV == 'production', // 最紧凑的输出
-        }),
-
-        new MiniCssExtractPlugin({
-            filename: 'css/[name]_[contenthash:8].css',
+            chunksSortMode: 'none'
         }),
     ]
 });

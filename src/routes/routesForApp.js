@@ -1,7 +1,7 @@
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Routes } from './routes';
 import React from 'react';
-import App from '../container/app';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { Routes } from './routes';
+import asyncComponent from './asyncComponent';
 
 export default class RoutesForApp extends React.Component {
     constructor() {
@@ -13,8 +13,11 @@ export default class RoutesForApp extends React.Component {
             <Router>
                 <Switch>
                     {
-                        Routes.map(route => <Route key={route.path} path={route.path} component={route.component}></Route>)
+                        Routes.map(route => 
+                            <Route key={route.path} exact={route.exact} path={route.path} component={route.component}></Route>
+                        )
                     }
+                    <Route path={'*'} render={_ => <Redirect to={'/'}/>}></Route>
                 </Switch>
             </Router>
         </React.Fragment>;
