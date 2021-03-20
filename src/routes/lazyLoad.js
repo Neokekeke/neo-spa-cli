@@ -21,7 +21,6 @@ export default function lazyLoad(loader) {
 
         render() {
             const { component: Component} = this.state;
-            console.log('Componentaaa', Component);
             if (Component) {
                 return <Component />;   
             }

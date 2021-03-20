@@ -28,11 +28,13 @@ class TestSagaCom extends React.Component {
         console.log('saga props', this.props);
         return (
             <div>
+                {/* ---------------------------------
                 <p>测试saga 模块</p>
                 <p onClick={this.handleAdd}>add</p>
                 <p onClick={this.handleMinus}>minus</p>
                 <p onClick={this.handleSyncAdd}>syncAdd</p>
                 {this.props.count}
+                --------------------------------- */}
             </div>
         );
     }

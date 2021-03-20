@@ -10,7 +10,7 @@ import {
 
 function* syncAdd(data) {
     try {
-        yield delay(2000);
+        yield delay(500);
         yield put({ type: 'SYNC_SAGA_ADD_SUCCESS', payload: data.payload });
     } catch (e) {
         yield put({ type: 'SYNC_SAGA_ADD_FAILED', payload: data.payload });

@@ -7,7 +7,6 @@ const initialState = fromJS({
 });
 
 export default function (state = initialState, actions) {
-    console.log('statestate', state.toJS());
     switch(actions.type) {
         case 'ADD':
             return state.set('count', state.get('count')  + actions.count);

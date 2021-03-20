@@ -9,6 +9,8 @@ import { createStructuredSelector } from 'reselect';
 import * as Actions from '@src/store/global/actions.js';
 import { selectorCount } from '@src/store/global/selectors.js';
 import ThemeContainer from './theme/themeContainer';
+import * as SagaActions from '@src/store/testSaga/actions.js';
+import { selectorSagaCount } from '@src/store/testSaga/selectors.js';
 
 // test
 // import * as Learn from '../utils/learn';
@@ -90,14 +92,15 @@ class App extends React.Component {
     }
 
     render() {
-        const { count } = this.props;
+        const { count, sagaCount } = this.props;
         const { githubData } = this.state;
 
         return (
             <div className={app.container}>
                 <p onClick={this.handleTestSaga}>test saga</p>
                 {githubData.authorizations_url}
-                <p>{count}</p>
+                <p>count: {count}</p>
+                <p>sagaCount: {sagaCount}</p>
                 <TestSagaCom />
             </div>
         );
@@ -105,13 +108,14 @@ class App extends React.Component {
 }
 const mapStateToProps = createStructuredSelector({
     count: selectorCount(),
+    sagaCount: selectorSagaCount()
 });
 
 const mapDispatchToProps = {
     add: Actions.add,
     minus: Actions.minus,
     mutiplys: Actions.mutiplys,
-    testSaga: Actions.SYNC_ADD
+    testSaga: SagaActions.SYNC_ADD,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

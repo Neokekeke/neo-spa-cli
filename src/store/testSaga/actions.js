@@ -21,6 +21,6 @@ export const MINUS = () => {
 export const SYNC_ADD = () => {
     return {
         type: SYNC_SAGA_ADD_REQUEST,
-        payload: 100
+        payload: 66
     };
 };
