@@ -5,7 +5,8 @@ module.exports = {
         extensions: ['.js', '.jsx'],
         alias: {
             '@util': path.resolve(__dirname, '../src/utils'),
-            '@src': path.resolve(__dirname, '../src')
+            '@src': path.resolve(__dirname, '../src'),
+            '@store': path.resolve(__dirname, '../src/store')
         },
     },
     module: {

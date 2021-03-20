@@ -5,6 +5,8 @@ const ADD = 'ADD';
 // MINUS
 const MINUS = 'MINUS';
 
+const TEST_SAGA = 'TEST_SAGA';
+
 export const add = () => {
     return {
         type: ADD,
@@ -32,5 +34,16 @@ export const mutiplys = (payload) => {
         }).catch(err => {
             dispatch(MUTIPLY_FAILED(err));
         });
+    };
+};
+
+export const SYNC_SAGA_ADD_REQUEST = 'GLOBAL_SYNC_SAGA_ADD_REQUEST';
+export const SYNC_SAGA_ADD_SUCCESS = 'GLOBAL_SYNC_SAGA_ADD_SUCCESS';
+export const SYNC_SAGA_ADD_FAILED = 'GLOBAL_SYNC_SAGA_ADD_FAILED';
+
+export const SYNC_ADD = () => {
+    return {
+        type: SYNC_SAGA_ADD_REQUEST,
+        payload: 100
     };
 };
