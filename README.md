@@ -1,5 +1,5 @@
 # my goal
-Improving and Progressing out-of-box iteration cli for react(redux|redux-saga|react-router ...etc)、for vue(vuex|vue-router ...etc) <br/>
+Improving and Progressing out-of-box iteration cli for react(redux|redux-saga|react-router ...etc), for vue(vuex|vue-router ...etc) <br/><br/>
 After fullfilling structure I possibly will package this project to the command line for engineering in future.
 
 # spa-cli
