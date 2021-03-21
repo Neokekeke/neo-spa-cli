@@ -10,7 +10,7 @@ import {
     useParams,
     Link
 } from 'react-router-dom';
-import App from './app';
+import App from '../container/app';
 
 // a page
 function APage() {

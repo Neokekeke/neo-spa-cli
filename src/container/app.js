@@ -1,3 +1,4 @@
+/* eslint-disable react/no-direct-mutation-state */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { Suspense, lazy } from 'react';
@@ -51,6 +52,9 @@ import { getX } from '../xhr/callApi';
 
 import TestSagaCom from './testSagaCom';
 
+// mini redux
+import '../miniRedux/test/reducers';
+
 export const ThemeContext = React.createContext();
 
 @LoggerHoc(666)
@@ -66,6 +70,11 @@ class App extends React.Component {
 
     async componentDidMount() {
         console.warn('Yes App And Style Mount', app);
+        setTimeout(() => {
+            // this.state. 方式赋值是不会更新组件的
+            this.state.name = '我最帅666';
+            // console.log('this.state', this.state);
+        }, 1000);
     }
 
     handleAdd = throttle((name) => {
@@ -93,7 +102,7 @@ class App extends React.Component {
 
     render() {
         const { count, sagaCount } = this.props;
-        const { githubData } = this.state;
+        const { githubData, name } = this.state;
 
         return (
             <div className={app.container}>
