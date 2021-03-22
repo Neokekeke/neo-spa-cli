@@ -69,6 +69,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "classnames": "^2.2.6",
     "immutable": "^4.0.0-rc.12",
     "lodash": "^4.17.20",
     "ramda": "^0.27.1",
