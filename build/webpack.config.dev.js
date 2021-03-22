@@ -9,7 +9,7 @@ module.exports = merge(base, {
     mode: 'development',
     entry: {
         app: [
-            'webpack-hot-middleware/client',
+            'webpack-hot-middleware/client?quiet=true&hot=true&reload=true',
             path.resolve(__dirname, '../src/container/index.js'),
         ],
     },

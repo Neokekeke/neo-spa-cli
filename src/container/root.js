@@ -1,18 +1,10 @@
-// mobx react状态管理库
-// 装饰器
-// 起到类、变量等修饰作用
-// jsx
-// import { obserable } from 'mobx-react';
-
 import RoutesForApp from '../routes/routesForApp';
 import React, { StrictMode }from 'react';
-import ReactDom from 'react-dom';
 import store from '../store/index';
 import { Provider } from 'react-redux'; // 类似于Context.Provider 对应的子组件都是 Context.Consumer
 
 // 错误边界捕获 errorBoundary
 import ErrorBoundary from './errorBoundary';
-import Root from './root';
 
 // StrictMode 严格模式下，副作用代码会执行两次，这是react为了确切标记潜在问题这样做的
 /**
@@ -24,4 +16,14 @@ import Root from './root';
 检测过时(遗留)的 context API
  */
 
-ReactDom.render(<Root/>, document.getElementById('root'));
+function Root() {
+    return <Provider store={store}>
+        <ErrorBoundary>
+            {/* <StrictMode> */}
+            <RoutesForApp />
+            {/* </StrictMode> */}
+        </ErrorBoundary>
+    </Provider>;
+}
+
+export default Root;

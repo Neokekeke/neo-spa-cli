@@ -106,7 +106,7 @@ class App extends React.Component {
 
         return (
             <div className={app.container}>
-                <p onClick={this.handleTestSaga}>test saga</p>
+                <p onClick={this.handleTestSaga}>test sagaa</p>
                 {githubData.authorizations_url}
                 <p>count: {count}</p>
                 <p>sagaCount: {sagaCount}</p>
