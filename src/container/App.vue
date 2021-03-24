@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div
+    id="aaa"
+    ref="aaa"
+  >
     <div
       v-for="(item, index) in ROUTER_ENUM"
       :key="index"
@@ -73,12 +76,24 @@ export default {
         return {
             ROUTER_ENUM: ['/home', '/about', '/index'],
             layout: [],
+<<<<<<< HEAD
+=======
+            name: 213
+>>>>>>> 8acb27c51fa640d709a193c954d4c31e72436c17
         };
     },
     computed: {
         ...mapGetters({
             storeName: 'storeName'
         })
+    },
+    beforeCreate(){
+      console.log('beforeCreate', this.$el);
+    },
+    created(){
+      console.log('created', this.$el);
+    },
+    beforeMount(){
     },
     mounted(){
         setTimeout(() => {
@@ -90,6 +105,12 @@ export default {
                 ]
             );
         }, 2000);
+    },
+    beforeUpdate(){
+      console.log('beforeUpdate', this);
+    },
+    updated(){
+      console.log('updated');
     },
     methods: {
         ...mapActions({
@@ -107,6 +128,9 @@ export default {
         },
         handleSet(){
             this.setStoreName('哈哈哈');
+        },
+        test(type){
+          console.log('tag log', type);
         }
     }
 };
