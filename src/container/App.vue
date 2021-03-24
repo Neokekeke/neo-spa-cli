@@ -5,11 +5,13 @@
       :key="index"
       class="route-warpper"
     >
-      <!-- <router-link :to="item">
-        {{ item.split("/")[1] }}
-      </router-link> -->
+      <router-link :to="item">
+        {{ item }}
+      </router-link>
     </div>
-    <router-view></router-view>
+    <keep-alive :exclude="['About22']">
+      <router-view></router-view>
+    </keep-alive>
 
     <div
       class="actions"
@@ -46,22 +48,31 @@
         {{ item.i }}
       </grid-item>
     </grid-layout>
+
+    <Home>
+      <template v-slot:header="{ user }">
+        {{ user.name }}
+      </template>
+    </Home>
   </div>
 </template>
 
 <script>
 import VueGridLayout from 'vue-grid-layout';
 import { mapActions, mapGetters } from 'vuex';
+import Home from './homePage';
+
 export default {
     name: 'Index',
     components: {
         GridLayout: VueGridLayout.GridLayout,
-        GridItem: VueGridLayout.GridItem
+        GridItem: VueGridLayout.GridItem,
+        Home
     },
     data(){
         return {
             ROUTER_ENUM: ['/home', '/about', '/index'],
-            layout: []
+            layout: [],
         };
     },
     computed: {
