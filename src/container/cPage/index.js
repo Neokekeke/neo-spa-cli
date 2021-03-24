@@ -7,7 +7,7 @@ export default class Cpage extends React.Component {
 
     render() {
         return <div>
-            this is c page
+            this is c page aaaaaaaaaaa
         </div>;
     }
 }
