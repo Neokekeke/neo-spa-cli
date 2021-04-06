@@ -6,13 +6,14 @@ Vue.use(VueRouter);
 // 路由懒加载
 const Home = () => import('../container/homePage/index.vue');
 const About = () => import('../container/aboutPage/index.vue');
+const Cpage = () => import('../container/cPage/index.vue');
 
 const router = new VueRouter({
     mode: 'history',
     routes: [
         {
-            path: '*',
-            redirect: '/home'
+            path: '/c-page',
+            component: Cpage
         },
         {
             name: 'home',

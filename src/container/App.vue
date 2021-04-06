@@ -17,6 +17,7 @@
     </keep-alive>
 
     <div
+      ref="aaa"
       class="actions"
       @click="handleGet"
     >
@@ -27,7 +28,7 @@
       setLayout
     </div>
 
-    <grid-layout
+    <!-- <grid-layout
       :layout.sync="layout"
       :col-num="12"
       :row-height="30"
@@ -50,36 +51,54 @@
       >
         {{ item.i }}
       </grid-item>
-    </grid-layout>
+    </grid-layout> -->
 
     <Home>
       <template v-slot:header="{ user }">
         {{ user.name }}
       </template>
     </Home>
+
+    <div class="lazy-load-container">
+      <img
+        v-for="i in 3"
+        :key="i"
+        class="img"
+        alt=""
+        :draggable="true"
+        @dragstart="dragstart"
+      >
+    </div>
+
+    <div
+      class="drag-container"
+      @dragover="dragover"
+      @drop="drop"
+    >
+    </div>
   </div>
 </template>
 
 <script>
-import VueGridLayout from 'vue-grid-layout';
+// import VueGridLayout from 'vue-grid-layout';
 import { mapActions, mapGetters } from 'vuex';
 import Home from './homePage';
+import '../utils/utils';
+import pkq from '../static/pkq.jpg';
+import { throlltle } from '../utils/throttle';
 
 export default {
     name: 'Index',
     components: {
-        GridLayout: VueGridLayout.GridLayout,
-        GridItem: VueGridLayout.GridItem,
+        // GridLayout: VueGridLayout.GridLayout,
+        // GridItem: VueGridLayout.GridItem,
         Home
     },
     data(){
         return {
-            ROUTER_ENUM: ['/home', '/about', '/index'],
+            ROUTER_ENUM: ['/home', '/about', '/c-page'],
             layout: [],
-<<<<<<< HEAD
-=======
-            name: 213
->>>>>>> 8acb27c51fa640d709a193c954d4c31e72436c17
+            pkq
         };
     },
     computed: {
@@ -88,14 +107,18 @@ export default {
         })
     },
     beforeCreate(){
-      console.log('beforeCreate', this.$el);
+        //   console.log('beforeCreate', this.$el);
     },
     created(){
-      console.log('created', this.$el);
+        this.$nextTick(() => {
+            // console.log('created', this.$el, this.$refs.aaa);
+        });
     },
     beforeMount(){
+        console.log('createdaaa', this.$el, this.$refs.aaa);
     },
     mounted(){
+        this.testCurry();
         setTimeout(() => {
             this.layout.push(
                 ...[
@@ -105,20 +128,29 @@ export default {
                 ]
             );
         }, 2000);
+
+        this.lazyLoad2();
+        window.onscroll = throlltle(() => {
+            this.lazyLoad2();
+        });
     },
     beforeUpdate(){
-      console.log('beforeUpdate', this);
+        //   console.log('beforeUpdate', this);
     },
     updated(){
-      console.log('updated');
+        //   console.log('updated');
     },
     methods: {
         ...mapActions({
             getStoreName: 'getStoreName',
             setStoreName: 'setStoreName'
         }),
+        testCurry(){},
         setLayout(){
             this.layout.splice(0, 1);
+        },
+        drop(){
+
         },
         handleGet(){
             this.getStoreName();
@@ -130,7 +162,37 @@ export default {
             this.setStoreName('哈哈哈');
         },
         test(type){
-          console.log('tag log', type);
+            console.log('tag log', type);
+        },
+        // 懒加载图片
+        lazyLoad(){
+            // 第一种getBoundingClientRect方式，通过
+            const imgArr = Array.from(document.getElementsByClassName('img'));
+
+            imgArr.forEach(img => {
+                const top = img.getBoundingClientRect().top;
+                console.log('top', top);
+                const clientHeight = window.innerHeight;
+                if (top < clientHeight && !img.src){
+                    img.src = this.pkq;
+                }
+            });
+        },
+        lazyLoad2(){
+            // 第二种方式，通过IntersectionObserver
+            const imgArr = Array.from(document.getElementsByClassName('img'));
+            const ob = new IntersectionObserver((...rest) => {
+                rest[0].forEach(list => {
+                    console.log(rest);
+                    if (list.isIntersecting && !list.target.src){
+                        list.target.src = this.pkq;
+                        ob.unobserve(list.target);
+                    }
+                });
+            });
+            imgArr.forEach(img => {
+                ob.observe(img);
+            });
         }
     }
 };
@@ -145,5 +207,16 @@ div {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+}
+
+.lazy-load-container {
+    display: flex;
+    flex-direction: column;
+
+    .img {
+        width: 300px;
+        height: 300px;
+        margin: 50px;
+    }
 }
 </style>
