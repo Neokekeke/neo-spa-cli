@@ -44,6 +44,8 @@ import { Counter } from '../utils/testReact/useReducer';
 import { TestPromise } from '../utils/testJs/promise';
 import '../utils/testJs/prototype';
 
+import CounterHook from './counterHook';
+
 // test js
 // import '../utils/testJs/reduce';
 
@@ -64,8 +66,18 @@ class App extends React.Component {
 
         this.state = {
             name: '我最帅',
-            githubData: {}
+            githubData: {},
+            count: 1
         };
+    }
+
+    static getDerivedStateFromProps(nextProps, prevState) {
+        console.log('nextProps, prevState', nextProps, prevState);
+        return {count: 3};
+    }
+
+    getSnapshotBeforeUpdate() {
+
     }
 
     async componentDidMount() {
@@ -74,7 +86,9 @@ class App extends React.Component {
             // this.state. 方式赋值是不会更新组件的
             this.state.name = '我最帅666';
             // console.log('this.state', this.state);
+            // this.setState({count: 2});
         }, 1000);
+        console.log('this.state', this.state);
     }
 
     handleAdd = throttle((name) => {
@@ -111,6 +125,8 @@ class App extends React.Component {
                 <p>count: {count}</p>
                 <p>sagaCount: {sagaCount}</p>
                 <TestSagaCom />
+
+                <CounterHook count={this.state.count}/>
             </div>
         );
     }

@@ -36,6 +36,13 @@ module.exports = {
         ['@babel/plugin-proposal-decorators', { 'legacy': true }],
         ['@babel/plugin-proposal-class-properties', { 'loose' : true }],
         ['@babel/plugin-transform-runtime'],
-        ['import', { libraryName: 'antd', style: 'css' }]
+        [
+            'import',
+            {
+                libraryName: 'antd',
+                style: true
+            },
+            'antd'
+        ],
     ]
 };

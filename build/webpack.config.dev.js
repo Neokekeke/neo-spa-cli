@@ -21,7 +21,7 @@ module.exports = merge(base, {
     module: {
         rules: [
             {
-                test: /\.(less|css)$/,
+                test: /\.less$/,
                 use: [
                     /**
                      * 根据环境使用不同loader <link> <-> <style>
@@ -41,6 +41,24 @@ module.exports = merge(base, {
                     },
                     'postcss-loader', // process CSS with PostCSS addprefix
                     'less-loader', // compiles Less to CSS
+                ],
+                exclude: path.resolve(__dirname, '../node_modules'),
+                // include: path.join(__dirname, '../node_modules/antd/lib')
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader', // translates CSS into CommonJS
+                        options: {
+                            modules: {
+                                mode: 'local', // enable css module 模块化
+                                localIdentName: '[local]_[hash:base64:8]', // 模块化名称
+                            },
+                        },
+                    },
+                    'postcss-loader', // process CSS with PostCSS addprefix
                 ],
                 exclude: path.resolve(__dirname, '../node_modules'),
             },
