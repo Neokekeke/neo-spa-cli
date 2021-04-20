@@ -66,15 +66,11 @@
         class="img"
         alt=""
         :draggable="true"
-        @dragstart="dragstart"
       >
     </div>
 
-    <div
-      class="drag-container"
-      @dragover="dragover"
-      @drop="drop"
-    >
+    <div class="drag-container">
+      {{ arrs }}
     </div>
   </div>
 </template>
@@ -92,30 +88,37 @@ export default {
     components: {
         // GridLayout: VueGridLayout.GridLayout,
         // GridItem: VueGridLayout.GridItem,
-        Home
+        Home,
     },
     data(){
         return {
             ROUTER_ENUM: ['/home', '/about', '/c-page'],
             layout: [],
-            pkq
+            pkq,
+            arr: [1, 2, 3, [1, 2, 3]],
         };
     },
     computed: {
         ...mapGetters({
-            storeName: 'storeName'
-        })
+            storeName: 'storeName',
+        }),
+        arrs(){
+            // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+            this.arr.length = 1000;
+            console.log('this.arr', this.arr, this.arr.length);
+            // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+            this.arr.splice(1000, 1, 666);
+            return this.arr;
+        },
     },
     beforeCreate(){
-        //   console.log('beforeCreate', this.$el);
+        console.log('beforeCreate', this.$el);
     },
     created(){
-        this.$nextTick(() => {
-            // console.log('created', this.$el, this.$refs.aaa);
-        });
+        console.log('created', this.pkq, this.$el, this.$refs.aaa);
     },
     beforeMount(){
-        console.log('createdaaa', this.$el, this.$refs.aaa);
+        console.log('beforeMount', this.pkq, this.$el, this.$refs.aaa);
     },
     mounted(){
         this.testCurry();
@@ -124,7 +127,7 @@ export default {
                 ...[
                     { x: 0, y: 0, w: 2, h: 2, i: '0' },
                     { x: 2, y: 0, w: 2, h: 4, i: '1' },
-                    { x: 4, y: 0, w: 2, h: 5, i: '2' }
+                    { x: 4, y: 0, w: 2, h: 5, i: '2' },
                 ]
             );
         }, 2000);
@@ -143,19 +146,17 @@ export default {
     methods: {
         ...mapActions({
             getStoreName: 'getStoreName',
-            setStoreName: 'setStoreName'
+            setStoreName: 'setStoreName',
         }),
         testCurry(){},
         setLayout(){
             this.layout.splice(0, 1);
         },
-        drop(){
-
-        },
+        drop(){},
         handleGet(){
             this.getStoreName();
             this.$router.push({
-                path: '/about'
+                path: '/about',
             });
         },
         handleSet(){
@@ -169,7 +170,7 @@ export default {
             // 第一种getBoundingClientRect方式，通过
             const imgArr = Array.from(document.getElementsByClassName('img'));
 
-            imgArr.forEach(img => {
+            imgArr.forEach((img) => {
                 const top = img.getBoundingClientRect().top;
                 console.log('top', top);
                 const clientHeight = window.innerHeight;
@@ -182,7 +183,7 @@ export default {
             // 第二种方式，通过IntersectionObserver
             const imgArr = Array.from(document.getElementsByClassName('img'));
             const ob = new IntersectionObserver((...rest) => {
-                rest[0].forEach(list => {
+                rest[0].forEach((list) => {
                     console.log(rest);
                     if (list.isIntersecting && !list.target.src){
                         list.target.src = this.pkq;
@@ -190,11 +191,11 @@ export default {
                     }
                 });
             });
-            imgArr.forEach(img => {
+            imgArr.forEach((img) => {
                 ob.observe(img);
             });
-        }
-    }
+        },
+    },
 };
 </script>
 
